@@ -30,6 +30,26 @@ def logout():
     session.pop('login', None)
     return redirect(url_for('index'))
 
+@app.route('/products')
+def products():
+    """Panel do zarządzania roduktami w magazynie"""
+    return 'Jakiś formularz z produktami (3, 4, 10)'
+
+@app.route('/personel')
+def personel():
+    """Panel do zarządzania personelem magazynu"""
+    return 'Formularz z danymi personelu (6, 7)'
+
+@app.route('/clients')
+def clients():
+    """Panel do zarządzania klientami"""
+    return 'Foramularz z danymi klientów (5)'
+
+@app.route('/transactions')
+def transactions():
+    """Panel do zarządzania tranzakcjami"""
+    return 'Formularz z danymi tranzakcji (8, 9)'
+
 app.secret_key = 'Ba2ArN13w01N1k0W'
 
 app.run()
