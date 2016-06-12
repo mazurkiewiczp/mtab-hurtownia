@@ -4,10 +4,11 @@
 from __future__ import absolute_import, print_function
 
 from flask import Flask, session, redirect, url_for, request, render_template
+from mysql_client import SQLClient
 # from flask_restful import Resource, Api
 
 app = Flask(__name__)
-
+data_base =SQLClient
 
 @app.route('/')
 def index():
