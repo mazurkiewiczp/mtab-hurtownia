@@ -20,8 +20,8 @@ CREATE TABLE Stanowisko(
 
 CREATE TABLE Etat(
 	id_etatu INT NOT NULL,
-	od INT NOT NULL,
-	do INT, /* tutaj nie jestem pewny czy od i do powinny być intami */
+	od varchar(8) NOT NULL,
+	do varchar(8),
 	pensja INT NOT NULL,
 	id_stanowiska INT,
 	id_pracownika INT,
