@@ -53,22 +53,28 @@ CREATE TABLE Produkt(
 	id_firmy INT,
 	nazwa varchar(20) NOT NULL,
 	opis varchar(60),
+	cena_sugerowana INT NOT NULL,
 	PRIMARY KEY (id_produktu),
 	FOREIGN KEY (id_kategorii) REFERENCES Kategoria (id_kategorii),
 	FOREIGN KEY (id_firmy) REFERENCES Firma (id_firmy)
 );
 
 CREATE TABLE Magazyn(
-	id_produktu INT NOT NULL AUTO_INCREMENT,
+	id_towaru INT NOT NULL AUTO_INCREMENT,
+	id_produktu INT NOT NULL,
 	ilosc INT NOT NULL,
-	lokalizacja varchar(60),
+	komentarz varchar(60),
+	PRIMARY KEY (id_towaru),
 	FOREIGN KEY (id_produktu) REFERENCES Produkt (id_produktu)
 );
 
 CREATE TABLE Sklep_detaliczny(
-	id_produktu INT NOT NULL AUTO_INCREMENT,
+	id_towaru INT NOT NULL AUTO_INCREMENT,
+	id_produktu INT NOT NULL,
 	cena_produktu INT NOT NULL,
 	ilosc_na_stanie INT,
+	komentarz varchar(60),
+	PRIMARY KEY (id_towaru),
 	FOREIGN KEY (id_produktu) REFERENCES Produkt (id_produktu)
 );
 
@@ -156,14 +162,14 @@ VALUES ('Producent','Fender');
 INSERT INTO Firma (rodzaj_firmy, nazwa_firmy)
 VALUES ('Producent','Ernie Ball');
 
-INSERT INTO Produkt (id_kategorii, id_firmy, nazwa)
-VALUES ('1','1','Stratocaster');
+INSERT INTO Produkt (id_kategorii, id_firmy, nazwa, cena_sugerowana)
+VALUES ('1','1','Stratocaster','3500');
 
-INSERT INTO Produkt (id_kategorii, id_firmy, nazwa)
-VALUES ('1','1','Telecaster');
+INSERT INTO Produkt (id_kategorii, id_firmy, nazwa, cena_sugerowana)
+VALUES ('1','1','Telecaster','3500');
 
-INSERT INTO Produkt (id_kategorii, id_firmy, nazwa, opis)
-VALUES ('2','2','Regular Slinky','10-46');
+INSERT INTO Produkt (id_kategorii, id_firmy, nazwa, opis, cena_sugerowana)
+VALUES ('3','2','Regular Slinky','10-46','18');
 
 INSERT INTO Magazyn (id_produktu, ilosc)
 VALUES ('1','3');
@@ -176,6 +182,9 @@ VALUES ('3','10');
 
 INSERT INTO Sklep_detaliczny (id_produktu, cena_produktu, ilosc_na_stanie)
 VALUES ('1','3000','1');
+
+INSERT INTO Sklep_detaliczny (id_produktu, cena_produktu, ilosc_na_stanie, komentarz)
+VALUES ('1','2500','1','Po ekspozycji');
 
 INSERT INTO Sklep_detaliczny (id_produktu, cena_produktu, ilosc_na_stanie)
 VALUES ('2','3500','1');
