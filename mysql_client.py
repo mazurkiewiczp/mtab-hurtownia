@@ -3,6 +3,7 @@
 
 from __future__ import absolute_import, print_function
 import MySQLdb as MS
+from subprocess import Popen, PIPE
 
 class SQLClient(object):
     """Klient do obsługi bazy danych"""
@@ -16,6 +17,10 @@ class SQLClient(object):
 
     def _init_database():
         """Tworzy bazę danych jeżeli nie istnieje"""
-        sql = 'CREATE DATABASE IF NOT EXISTS hurtownia'
-        self.data_base.execute(sql)
-
+        user = "root"
+        passwd = "1234"
+        db = "mtab_db"
+        filename = mtab.sql
+        process = Popen(['mysql', db, '-u', user, '-p', passwd],
+                                stdout=PIPE, stdin=PIPE)
+        output = process.communicate('source ' + filename)[0]
