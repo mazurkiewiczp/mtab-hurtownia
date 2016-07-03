@@ -38,7 +38,13 @@ def det():
     if not "login" in session:
         return redirect(url_for('login'))
     if request.method == 'POST':
-        pass
+        if request.form['id_produktu'] and request.form['cena'] and request.form['ilosc'] and request.form['data']:
+           print(base.add_transakcje_detaliczne(
+               request.form['id_produktu'],
+               request.form['cena'],
+               request.form['ilosc'],
+               request.form['data']
+            ))
     return render_template('det.html',
             transakcje_detaliczne=base.get_table_data('Transakcje_detaliczne'),
             produkt=base.get_table_data('Produkt'),
@@ -83,6 +89,14 @@ def pracownicy():
 def sklep():
     if not "login" in session:
         return redirect(url_for('login'))
+    if request.method == 'POST':
+        if request.form['id_produktu'] and request.form['cena_produktu']:
+           print(base.add_sklep_detaliczny(
+               request.form['id_produktu'],
+               request.form['cena_produktu'],
+               request.form['ilosc_na_stanie'],
+               request.form['komentarz']
+            ))
     return render_template('sklep.html',
             sklep_detaliczny=base.get_table_data("Sklep_detaliczny"),
             produkt=base.get_table_data('Produkt'),
@@ -95,6 +109,13 @@ def sklep():
 def zamowienia():
     if not "login" in session:
         return redirect(url_for('login'))
+    if request.method == 'POST':
+        if request.form['id_produktu'] and request.form['cena_produktu'] and request.form['ilosc_produktu']:
+           print(base.add_zamowienie(
+               request.form['id_produktu'],
+               request.form['cena_produktu'],
+               request.form['ilosc_produktu'],
+            ))
     return render_template('zamowienia.html',
             transakcja_hurtowa=base.get_table_data('Transakcja_hurtowa'),
             zamowienie=base.get_table_data("Zamowienie"),
@@ -102,6 +123,18 @@ def zamowienia():
             firma=base.get_table_data('Firma'),
             kategoria=base.get_table_data('Kategoria')
         )
+
+#Wzorzec XXX
+@app.route('/stanowisko', methods=['GET', 'POST'])
+def stanowisko():
+    if not "login" in session:
+        return redirect(url_for('login'))
+    if request.method == 'POST':
+        if request.form['opis_stanowiska']:
+           print(base.add_stanowisko(
+               request.form['opis_stanowiska']
+            ))
+    return base.get_table_data('Stanowisko')
 
 app.secret_key = 'Ba2ArN13w01N1k0W'
 
