@@ -37,9 +37,26 @@
   </nav>
   <div class="container">
     <div class="well">
+      <form method="post" action="pracownicy">
+        <p><input type="text" name="imie" value="" placeholder="Imie pracownika"></p>
+        <p><input type="text" name="nazwisko" value="" placeholder="Nazwisko Pracownika"></p>
+        <p><input type="text" name="telefon" value="" placeholder="telefon"></p>
+        <p><input type="text" name="mail" value="" placeholder="mail"></p>
+        <p class="submit"><input type="submit" name="commit" value="Dodaj"></p>
+      </form>
+    </div>
+
+    <div class="login-help">
+      <p>Zapomniałeś hasła? <a href="index.html">Kliknij tutaj aby je zresetować</a>.</p>
+    </div>
+  </div>
+    <div class="well">
       <h3>Dzień dobry</h3>
       <p>
         Pracownicy: Pracownik,Etat,Stanowisko.
+      </p>
+      <p>
+      {{pracownik}}
       </p>
     </div>
   </div>

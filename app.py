@@ -8,7 +8,8 @@ from mysql_client import SQLClient
 # from flask_restful import Resource, Api
 
 app = Flask(__name__)
-data_base =SQLClient
+base =SQLClient()
+base.get_table_data('Pracownik')
 
 @app.route('/')
 def index():
@@ -31,36 +32,56 @@ def logout():
     session.pop('login', None)
     return redirect(url_for('index'))
 
-@app.route('/det')
-@app.route('/det.html')
+@app.route('/det', methods=['GET', 'POST'])
+@app.route('/det.html', methods=['GET', 'POST'])
 def det():
     if not "login" in session:
         return redirect(url_for('login'))
-    return render_template('det.html')
+    if request.method == 'POST':
+        pass
+    return render_template('det.html',
+            transakcje_detaliczne='',
+            produkt='',
+            kategoria='',
+            firma=''
+        )
 
-@app.route('/magazyn')
-@app.route('/magazyn.html')
+@app.route('/magazyn', methods=['GET', 'POST'])
+@app.route('/magazyn.html', methods=['GET', 'POST'])
 def magazyn():
     if not "login" in session:
         return redirect(url_for('login'))
     return render_template('magazyn.html')
 
-@app.route('/pracownicy')
-@app.route('/pracownicy.html')
+@app.route('/pracownicy', methods=['GET', 'POST'])
+@app.route('/pracownicy.html', methods=['GET', 'POST'])
 def pracownicy():
     if not "login" in session:
         return redirect(url_for('login'))
-    return render_template('pracownicy.html')
+    if request.method == 'POST':
+        if request.form['imie'] and request.form['nazwisko']:
+           print(base.add_employee(
+               request.form['imie'],
+               request.form['nazwisko'],
+               request.form['telefon'],
+               request.form['mail']
+            ))
+    return render_template(
+            'pracownicy.html',
+            pracownik=base.get_table_data("Pracownik"),
+            etat=base.get_table_data("Etat"),
+            stanowisko=base.get_table_data("Stanowisko")
+        )
 
-@app.route('/sklep')
-@app.route('/sklep.html')
+@app.route('/sklep', methods=['GET', 'POST'])
+@app.route('/sklep.html', methods=['GET', 'POST'])
 def sklep():
     if not "login" in session:
         return redirect(url_for('login'))
     return render_template('sklep.html')
 
-@app.route('/zamowienia')
-@app.route('/zamowienia.html')
+@app.route('/zamowienia', methods=['GET', 'POST'])
+@app.route('/zamowienia.html', methods=['GET', 'POST'])
 def zamowienia():
     if not "login" in session:
         return redirect(url_for('login'))
