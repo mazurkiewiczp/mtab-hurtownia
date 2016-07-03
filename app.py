@@ -40,10 +40,10 @@ def det():
     if request.method == 'POST':
         pass
     return render_template('det.html',
-            transakcje_detaliczne='',
-            produkt='',
-            kategoria='',
-            firma=''
+            transakcje_detaliczne=base.get_table_data('Transakcje_detaliczne'),
+            produkt=base.get_table_data('Produkt'),
+            kategoria=base.get_table_data('Kategoria'),
+            firma=base.get_table_data('Firma')
         )
 
 @app.route('/magazyn', methods=['GET', 'POST'])
@@ -51,7 +51,12 @@ def det():
 def magazyn():
     if not "login" in session:
         return redirect(url_for('login'))
-    return render_template('magazyn.html')
+    return render_template('magazyn.html',
+            magazyn=base.get_table_data('Magazyn'),
+            produkt=base.get_table_data('Produkt'),
+            kategoria=base.get_table_data('Kategoria'),
+            firma=base.get_table_data('Firma')
+        )
 
 @app.route('/pracownicy', methods=['GET', 'POST'])
 @app.route('/pracownicy.html', methods=['GET', 'POST'])
@@ -78,14 +83,25 @@ def pracownicy():
 def sklep():
     if not "login" in session:
         return redirect(url_for('login'))
-    return render_template('sklep.html')
+    return render_template('sklep.html',
+            sklep_detaliczny=base.get_table_data("Sklep_detaliczny"),
+            produkt=base.get_table_data('Produkt'),
+            kategoria=base.get_table_data('Kategoria'),
+            firma=base.get_table_data('Firma')
+        )
 
 @app.route('/zamowienia', methods=['GET', 'POST'])
 @app.route('/zamowienia.html', methods=['GET', 'POST'])
 def zamowienia():
     if not "login" in session:
         return redirect(url_for('login'))
-    return render_template('zamowienia.html')
+    return render_template('zamowienia.html',
+            transakcja_hurtowa=base.get_table_data('Transakcja_hurtowa'),
+            zamowienie=base.get_table_data("Zamowienie"),
+            produkt=base.get_table_data('Produkt'),
+            firma=base.get_table_data('Firma'),
+            kategoria=base.get_table_data('Kategoria')
+        )
 
 app.secret_key = 'Ba2ArN13w01N1k0W'
 
