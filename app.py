@@ -31,25 +31,40 @@ def logout():
     session.pop('login', None)
     return redirect(url_for('index'))
 
-@app.route('/products')
-def products():
-    """Panel do zarządzania roduktami w magazynie"""
-    return 'Jakiś formularz z produktami (3, 4, 10)'
+@app.route('/det')
+@app.route('/det.html')
+def det():
+    if not "login" in session:
+        return redirect(url_for('login'))
+    return render_template('det.html')
 
-@app.route('/personel')
-def personel():
-    """Panel do zarządzania personelem magazynu"""
-    return 'Formularz z danymi personelu (6, 7)'
+@app.route('/magazyn')
+@app.route('/magazyn.html')
+def magazyn():
+    if not "login" in session:
+        return redirect(url_for('login'))
+    return render_template('magazyn.html')
 
-@app.route('/clients')
-def clients():
-    """Panel do zarządzania klientami"""
-    return 'Foramularz z danymi klientów (5)'
+@app.route('/pracownicy')
+@app.route('/pracownicy.html')
+def pracownicy():
+    if not "login" in session:
+        return redirect(url_for('login'))
+    return render_template('pracownicy.html')
 
-@app.route('/transactions')
-def transactions():
-    """Panel do zarządzania tranzakcjami"""
-    return 'Formularz z danymi tranzakcji (8, 9)'
+@app.route('/sklep')
+@app.route('/sklep.html')
+def sklep():
+    if not "login" in session:
+        return redirect(url_for('login'))
+    return render_template('sklep.html')
+
+@app.route('/zamowienia')
+@app.route('/zamowienia.html')
+def zamowienia():
+    if not "login" in session:
+        return redirect(url_for('login'))
+    return render_template('zamowienia.html')
 
 app.secret_key = 'Ba2ArN13w01N1k0W'
 
