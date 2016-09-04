@@ -12,7 +12,8 @@ class SQLClient(object):
     def __init__(self):
         self.data_base = MS.connect(host='localhost', user='root', passwd='1234')
         self._init_database()
-        sql = """CREATE """
+        self.data_base.autocommit(True)
+        # sql = """CREATE """
 
     def get_table_data(self, table_name):
         """Pobieranie danych z wskazanej tabeli"""
@@ -24,7 +25,8 @@ class SQLClient(object):
         """Dodaje pracownika"""
         sql = """INSERT INTO Pracownik (imie, nazwisko, telefon, mail) VALUES (%s, %s, %s, %s);"""
         self.cursor.execute(sql, (imie, nazwisko, telefon, mail))
-        return self.cursor.fetchall()
+        result = self.cursor.fetchall()
+        return result
 
     def add_etat(self, od, pensja, id_stanowiska, id_pracownika, do=None):
         """Dodaje etat"""
@@ -95,4 +97,5 @@ class SQLClient(object):
         # print (self.cursor.fetchall())
         sql = 'USE {};'.format(DB_NAME)
         self.cursor.execute(sql)
-        print (self.cursor.fetchall())
+        self.cursor.fetchall()
+        # print (self.cursor.fetchall())
