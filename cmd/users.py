@@ -13,7 +13,7 @@ import crypt
 
 USERS_FILE = os.getenv("USER_FILE", """../users.json""")
 
-def _get_users():
+def get_users():
     """Wyświetla użytkowników zdefiniowanych w pliku"""
     try:
         with open(USERS_FILE) as users_file:
@@ -25,14 +25,14 @@ def _get_users():
 
 def _add_user(user, password):
     """Dodaje użytkownika"""
-    users = _get_users()
+    users = get_users()
     users[user] = crypt.crypt("password", 'pw')
     with open(USERS_FILE, "w") as users_file:
         json.dump(users, users_file)
 
 
 def _del_user(user):
-    users = _get_users()
+    users = get_users()
     try:
         del users[user]
         with open(USERS_FILE, "w") as users_file:
@@ -51,7 +51,6 @@ def main():
     parser.add_argument("--del_user", type=unicode, help='Usunięcie użytkownika')
 
     args = parser.parse_args()
-    print (args)
 
     if args.user:
         if not args.password:
@@ -63,7 +62,7 @@ def main():
         _del_user(args.del_user)
 
     if args.list:
-        for user in _get_users():
+        for user in get_users():
             print(user)
 
 
