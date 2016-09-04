@@ -15,6 +15,7 @@
 </head>
 
 <body>
+
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div id="navbar" class="navbar-collapse collapse">
@@ -35,8 +36,39 @@
       </div>
     </div>
   </nav>
+
   <div class="container">
     <div class="well">
+      <p>
+	<table>
+	<tr>
+	<th>ID</th>
+	<th>Imię</th>
+	<th>Nazwisko</th>
+	<th>Telefon</th>
+	<th>E-mail</th>
+	<th></th>
+	</tr>
+	{% for item in pracownik %}
+	<tr>
+        <th>{{ item[0] }}</th>
+	<th>{{ item[1] }}</th>
+	<th>{{ item[2] }}</th>
+	<th>{{ item[3] }}</th>
+	<th>{{ item[4] }}</th>
+	<th><div style="text-align:center;"><button type="button">Usuń</button></div></th>
+	</tr>
+    	{% endfor %}
+	</table>
+      </p>
+    </div>
+   </div>
+
+
+  <div class="container">
+    <div class="well">
+      <div style="text-align:center;">
+      <h3>Dodaj pracownika</h3>
       <form method="post" action="pracownicy">
         <p><input type="text" name="imie" value="" placeholder="Imie pracownika"></p>
         <p><input type="text" name="nazwisko" value="" placeholder="Nazwisko Pracownika"></p>
@@ -44,20 +76,7 @@
         <p><input type="text" name="mail" value="" placeholder="mail"></p>
         <p class="submit"><input type="submit" name="commit" value="Dodaj"></p>
       </form>
-    </div>
-
-    <div class="login-help">
-      <p>Zapomniałeś hasła? <a href="index.html">Kliknij tutaj aby je zresetować</a>.</p>
-    </div>
-  </div>
-    <div class="well">
-      <h3>Dzień dobry</h3>
-      <p>
-        Pracownicy: Pracownik,Etat,Stanowisko.
-      </p>
-      <p>
-      {{pracownik}}
-      </p>
+      </div>
     </div>
   </div>
 </body>

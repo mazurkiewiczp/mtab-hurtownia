@@ -123,7 +123,7 @@ INSERT INTO Pracownik (imie, nazwisko, telefon, mail)
 VALUES ('Janina', 'Nowak','123987654','janina.nowak@gmail.com');
 
 INSERT INTO Pracownik (imie, nazwisko, telefon, mail)
-VALUES ('Angus', 'Młody','987666321','high@voltage.com');
+VALUES ('Angus', 'Mlody','987666321','high@voltage.com');
 
 INSERT INTO Stanowisko (opis_stanowiska)
 VALUES ('Magazynier');
