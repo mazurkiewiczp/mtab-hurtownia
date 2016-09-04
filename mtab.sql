@@ -1,6 +1,6 @@
 CREATE DATABASE mtab_db;
 
-USE mtab_db
+USE mtab_db;
 
 /* część o pracownikach */
 CREATE TABLE Pracownik(
@@ -110,7 +110,7 @@ CREATE TABLE Transakcja_hurtowa(
 
 
 /* troche insertów do testowania bazy */
-USE mtab_db
+USE mtab_db;
 
 /*pracownicy i etaty*/
 INSERT INTO Pracownik (imie, nazwisko)

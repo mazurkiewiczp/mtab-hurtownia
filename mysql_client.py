@@ -12,6 +12,7 @@ class SQLClient(object):
     def __init__(self):
         self.data_base = MS.connect(host='localhost', user='root', passwd='1234')
         self._init_database()
+        sql = """CREATE """
 
     def get_table_data(self, table_name):
         """Pobieranie danych z wskazanej tabeli"""
@@ -87,10 +88,11 @@ class SQLClient(object):
 
     def _init_database(self):
         """Tworzy bazę danych jeżeli nie istnieje"""
+        pass
         self.cursor = self.data_base.cursor()
-        sql = 'CREATE DATABASE IF NOT EXISTS {};'.format(DB_NAME)
-        self.cursor.execute(sql)
-        print (self.cursor.fetchall())
+        # sql = 'CREATE DATABASE IF NOT EXISTS {};'.format(DB_NAME)
+        # self.cursor.execute(sql)
+        # print (self.cursor.fetchall())
         sql = 'USE {};'.format(DB_NAME)
         self.cursor.execute(sql)
         print (self.cursor.fetchall())
