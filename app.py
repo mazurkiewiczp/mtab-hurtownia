@@ -14,6 +14,11 @@ app = Flask(__name__)
 base = SQLClient()
 base.get_table_data('Pracownik')
 
+from OpenSSL import SSL
+context = SSL.Context(SSL.SSLv23_METHOD)
+context.use_privatekey_file('server.key')
+context.use_certificate_file('server.crt')
+
 def _check_password(login, password):
     """sprawdzanie hasła"""
     keys = users.get_users()
@@ -156,5 +161,5 @@ def stanowisko():
 
 
 app.secret_key = 'Ba2ArN13w01N1k0W'
-
-app.run()
+context = ('server.crt', 'server.key')
+app.run(ssl_context=context)
