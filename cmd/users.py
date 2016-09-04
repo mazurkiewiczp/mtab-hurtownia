@@ -11,7 +11,7 @@ import os
 
 import crypt
 
-USERS_FILE = os.getenv("USER_FILE", """../users.json""")
+USERS_FILE = os.getenv("USER_FILE", """.users.json""")
 
 def get_users():
     """Wyświetla użytkowników zdefiniowanych w pliku"""
@@ -26,7 +26,7 @@ def get_users():
 def _add_user(user, password):
     """Dodaje użytkownika"""
     users = get_users()
-    users[user] = crypt.crypt("password", 'pw')
+    users[user] = crypt.crypt(password, 'pw')
     with open(USERS_FILE, "w") as users_file:
         json.dump(users, users_file)
 

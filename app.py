@@ -3,8 +3,10 @@
 
 from __future__ import absolute_import, print_function
 
+import crypt
 from flask import Flask, session, redirect, url_for, request, render_template
 from mysql_client import SQLClient
+import cmd.users as users
 
 # from flask_restful import Resource, Api
 
@@ -14,8 +16,8 @@ base.get_table_data('Pracownik')
 
 def _check_password(login, password):
     """sprawdzanie hasła"""
-    keys = {'ja': "1234", "admin": "admin"}
-    if login in keys.keys() and password == keys[login]:
+    keys = users.get_users()
+    if login in keys.keys() and crypt.crypt(password, 'pw') == keys[login]:
         return True
     return False
 
