@@ -12,6 +12,12 @@ app = Flask(__name__)
 base = SQLClient()
 base.get_table_data('Pracownik')
 
+def _check_password(login, password):
+    """sprawdzanie hasła"""
+    keys = {'ja': "1234", "admin": "admin"}
+    if login in keys.keys() and password == keys[login]:
+        return True
+    return False
 
 @app.route('/')
 def index():
@@ -24,10 +30,10 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # if password
-        session['login'] = request.form['login']
-        return redirect(url_for('index'))
-    return render_template('login.html')
+        if _check_password(request.form['login'], request.form['password']):
+            session['login'] = request.form['login']
+            return redirect(url_for('index'))
+    return render_template('login.html', info='Incorrect')
 
 
 @app.route('/logout')
