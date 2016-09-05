@@ -41,6 +41,7 @@
 
   <div class="container">
     <div class="well">
+      <h3>Pracownicy</h3>
       <p>
 	<table>
 	<tr>
@@ -70,7 +71,7 @@
 	<th>{{ item[8] }}</th>
 	<th>{{ item[9] }}</th>
 	<th>{{ item[10] }}</th>
-	<th><div style="text-align:center;"><button type="button">Usuń</button></div></th>
+	<th><div style="text-align:center;"><form action="pracownik/{{ item[0] }}"><input type="submit" value="Usuń" /></form></div></th>
 	</tr>
     	{% endfor %}
 	</table>
@@ -81,7 +82,6 @@
 
   <div class="container">
     <div class="well">
-      <div style="text-align:center;">
       <h3>Dodaj pracownika</h3>
       <form method="post" action="pracownicy">
         <p><input type="text" name="imie" value="" placeholder="Imie pracownika"></p>
@@ -90,13 +90,11 @@
         <p><input type="text" name="mail" value="" placeholder="mail"></p>
         <p class="submit"><input type="submit" name="commit" value="Dodaj"></p>
       </form>
-      </div>
     </div>
   </div>
 
   <div class="container">
     <div class="well">
-      <div style="text-align:center;">
       <h3>Dodaj Etat</h3>
       <form method="post" action="nowy_etat">
         <p><input type="text" name="od" value="" placeholder="Od"></p>
@@ -106,14 +104,13 @@
         <p><input type="text" name="id_pracownika" value="" placeholder="id_pracownika"></p>
         <p class="submit"><input type="submit" name="commit" value="Dodaj"></p>
       </form>
-      </div>
     </div>
   </div>
 
 
   <div class="container">
     <div class="well">
-      <div style="text-align:center;">
+      <h3>Stanowiska</h3>
 	<p>    
 	<table>
 	<tr>
@@ -125,7 +122,7 @@
 	<tr>
 	<th>{{ item[0] }}</th>
 	<th>{{ item[1] }}</th>
-	<th><div style="text-align:center;"><button type="button">Usuń</button></div></th>
+	<th><div style="text-align:center;"><form action="stanowisko/{{ item[0] }}"><input type="submit" value="Usuń" /></form></div></th>
 	</tr>
     	{% endfor %}
 	</table>
@@ -135,7 +132,6 @@
         <p><input type="text" name="stanowisko" value="" placeholder="Stanowisko"></p>
         <p class="submit"><input type="submit" name="commit" value="Dodaj"></p>
       </form>
-      </div>
     </div>
   </div>
 

@@ -22,7 +22,6 @@ context = SSL.Context(SSL.SSLv23_METHOD)
 context.use_privatekey_file('server.key')
 context.use_certificate_file('server.crt')
 
-
 class Pracownik(Resource):
     def delete(self, id):
         return base.delete_pracownik(id)
