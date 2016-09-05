@@ -194,7 +194,9 @@ def zamowienia():
                            zamowienie=base.get_table_data("Zamowienie"),
                            produkt=base.get_table_data('Produkt'),
                            firma=base.get_table_data('Firma'),
-                           kategoria=base.get_table_data('Kategoria')
+                           kategoria=base.get_table_data('Kategoria'),
+                           zamowienia_lista=base.get_zamowienia_lista(),
+                           zamowienia_produkty=base.get_zamowienia_produkty()			
                            )
 
 

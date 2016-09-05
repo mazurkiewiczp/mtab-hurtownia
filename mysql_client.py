@@ -22,6 +22,16 @@ class SQLClient(object):
         self.cursor.execute(sql)
         return self.cursor.fetchall()
 
+    def get_zamowienia_lista(self):
+        sql = """select Transakcja_hurtowa.*, Zamowienie.id_produktu, Zamowienie.cena_produktu, Zamowienie.ilosc_produktu from Transakcja_hurtowa left join Zamowienie on Transakcja_hurtowa.id_zamowienia = Zamowienie.id_zamowienia;"""
+        self.cursor.execute(sql)
+        return self.cursor.fetchall()
+
+    def get_zamowienia_produkty(self):
+        sql = """select Produkt.id_produktu, Produkt.id_kategorii, Kategoria.opis_kategorii, Produkt.id_firmy, Firma.nazwa_firmy, Firma.rodzaj_firmy, Firma.adres, Firma.telefon, Produkt.nazwa, Produkt.opis, Produkt.cena_sugerowana from Produkt left join Kategoria on Produkt.id_kategorii = Kategoria.id_kategorii left join Firma on Produkt.id_firmy = Firma.id_firmy;"""
+        self.cursor.execute(sql)
+        return self.cursor.fetchall()
+
     def get_table_data(self, table_name):
         """Pobieranie danych z wskazanej tabeli"""
         sql = """SELECT * FROM %s;"""

@@ -119,11 +119,13 @@
 	<tr>
 	<th>ID Stanowiska</th>
 	<th>Stanowisko</th>
+	<th></th>
 	</tr>
 	{% for item in stanowisko %}
 	<tr>
 	<th>{{ item[0] }}</th>
 	<th>{{ item[1] }}</th>
+	<th><div style="text-align:center;"><button type="button">Usuń</button></div></th>
 	</tr>
     	{% endfor %}
 	</table>

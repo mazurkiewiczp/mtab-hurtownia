@@ -37,14 +37,82 @@
       </div>
     </div>
   </nav>
+
   <div class="container">
     <div class="well">
-      <h3>Dzień dobry</h3>
       <p>
-        Zamówienia Magazyn: Transakcja_hurtowa,Zamówienie,Produkt,Firma,Kategoria.
+	<table>
+	<tr>
+	<th>ID transakcji</th>
+	<th>ID Firmy</th>
+	<th>Data</th>
+	<th>Rodzaj transakcji</th>
+	<th>ID Zamówienia</th>
+	<th>ID Produktu</th>
+	<th>Cena</th>
+	<th>Ilość</th>
+	<th></th>
+	</tr>
+	{% for item in zamowienia_lista %}
+	<tr>
+        <th>{{ item[0] }}</th>
+	<th>{{ item[1] }}</th>
+	<th>{{ item[2] }}</th>
+	<th>{{ item[3] }}</th>
+	<th>{{ item[4] }}</th>
+        <th>{{ item[5] }}</th>
+	<th>{{ item[6] }}</th>
+	<th>{{ item[7] }}</th>
+	<th><div style="text-align:center;"><button type="button">Usuń</button></div></th>
+	</tr>
+    	{% endfor %}
+	</table>
       </p>
     </div>
-  </div>
+   </div>
+
+  <div class="container">
+    <div class="well">
+      <p>
+	<table>
+	<tr>
+	<th>ID Produktu</th>
+	<th>ID Kategorii</th>
+	<th>Kategoria</th>
+	<th>ID Firmy</th>
+	<th>Firma</th>
+	<th>Rodzaj</th>
+	<th>Adres</th>
+	<th>Telefon</th>
+	<th>Produkt</th>
+	<th>Opis</th>
+	<th>Cena sugerowana</th>
+	<th></th>
+	</tr>
+	{% for item in zamowienia_produkty %}
+	<tr>
+        <th>{{ item[0] }}</th>
+	<th>{{ item[1] }}</th>
+	<th>{{ item[2] }}</th>
+	<th>{{ item[3] }}</th>
+	<th>{{ item[4] }}</th>
+        <th>{{ item[5] }}</th>
+	<th>{{ item[6] }}</th>
+	<th>{{ item[7] }}</th>
+	<th>{{ item[8] }}</th>
+	<th>{{ item[9] }}</th>
+	<th>{{ item[10] }}</th>
+	<th><div style="text-align:center;"><button type="button">Usuń</button></div></th>
+	</tr>
+    	{% endfor %}
+	</table>
+      </p>
+    </div>
+   </div>
+
+
+
+
 </body>
 
 </html>
