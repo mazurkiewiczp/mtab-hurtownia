@@ -105,6 +105,43 @@ def pracownicy():
         stanowisko=base.get_table_data("Stanowisko")
     )
 
+@app.route('/nowy_etat', methods=['GET', 'POST'])
+def nowy_etat():
+    if not "login" in session:
+        return redirect(url_for('login'))
+    if request.method == 'POST':
+        if request.form['od'] and request.form['id_stanowiska'] and request.form['id_pracownika']:
+            print(base.add_etat(
+                request.form['od'],
+                request.form['pensja'],
+                request.form['id_stanowiska'],
+                request.form['id_pracownika'],
+                request.form['do'],
+            ))
+    return render_template(
+        'pracownicy.html',
+        wszystko=base.get_pracownicy(),
+        pracownik=base.get_table_data("Pracownik"),
+        etat=base.get_table_data("Etat"),
+        stanowisko=base.get_table_data("Stanowisko")
+    )
+
+@app.route('/nowe_stanowisko', methods=['GET', 'POST'])
+def nowe_stanowisko():
+    if not "login" in session:
+        return redirect(url_for('login'))
+    if request.method == 'POST':
+        if request.form['stanowisko']:
+            print(base.add_stanowisko(
+                request.form['stanowisko']
+            ))
+    return render_template(
+        'pracownicy.html',
+        wszystko=base.get_pracownicy(),
+        pracownik=base.get_table_data("Pracownik"),
+        etat=base.get_table_data("Etat"),
+        stanowisko=base.get_table_data("Stanowisko")
+    )
 
 @app.route('/sklep', methods=['GET', 'POST'])
 @app.route('/sklep.html', methods=['GET', 'POST'])

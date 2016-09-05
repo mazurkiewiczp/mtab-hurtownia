@@ -93,6 +93,49 @@
       </div>
     </div>
   </div>
-</body>
 
+  <div class="container">
+    <div class="well">
+      <div style="text-align:center;">
+      <h3>Dodaj Etat</h3>
+      <form method="post" action="nowy_etat">
+        <p><input type="text" name="od" value="" placeholder="Od"></p>
+        <p><input type="text" name="do" value="" placeholder="Do"></p>
+        <p><input type="text" name="pensja" value="" placeholder="Pensja"></p>
+        <p><input type="text" name="id_stanowiska" value="" placeholder="id_stanowiska"></p>
+        <p><input type="text" name="id_pracownika" value="" placeholder="id_pracownika"></p>
+        <p class="submit"><input type="submit" name="commit" value="Dodaj"></p>
+      </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="well">
+      <div style="text-align:center;">
+	<p>    
+	<table>
+	<tr>
+	<th>ID Stanowiska</th>
+	<th>Stanowisko</th>
+	</tr>
+	{% for item in stanowisko %}
+	<tr>
+	<th>{{ item[0] }}</th>
+	<th>{{ item[1] }}</th>
+	</tr>
+    	{% endfor %}
+	</table>
+	</p>
+      <h3>Dodaj Stanowisko</h3>
+      <form method="post" action="nowe_stanowisko">
+        <p><input type="text" name="stanowisko" value="" placeholder="Stanowisko"></p>
+        <p class="submit"><input type="submit" name="commit" value="Dodaj"></p>
+      </form>
+      </div>
+    </div>
+  </div>
+
+</body>
 </html>
