@@ -132,7 +132,7 @@ INSERT INTO Stanowisko (opis_stanowiska)
 VALUES ('Sprzedawca');
 
 INSERT INTO Stanowisko (opis_stanowiska)
-VALUES ('Szef wszystkich szefów');
+VALUES ('Szef wszystkich szefow');
 
 INSERT INTO Etat (od, do, pensja, id_stanowiska, id_pracownika)
 VALUES ('02022015','06122015','3000','1','1');

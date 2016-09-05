@@ -15,6 +15,13 @@ class SQLClient(object):
         self.data_base.autocommit(True)
         # sql = """CREATE """
 
+    def get_pracownicy(self):
+        """Pobieranie wszystkiego z tabel Pracownik, Etat, Stanowisko"""
+        sql = """select Pracownik.*, Etat.id_etatu, Etat.od, Etat.do, Etat.pensja, Stanowisko.id_stanowiska, Stanowisko.opis_stanowiska from Pracownik left join Etat on Etat.id_pracownika = Pracownik.id_pracownika left join Stanowisko on Etat.id_stanowiska = Stanowisko.id_stanowiska;
+"""
+        self.cursor.execute(sql)
+        return self.cursor.fetchall()
+
     def get_table_data(self, table_name):
         """Pobieranie danych z wskazanej tabeli"""
         sql = """SELECT * FROM %s;"""

@@ -20,7 +20,7 @@
     <div class="container">
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="index.html">Strona główna</a>
+          <li><a href="index.html">Strona główna</a>
           </li>
           <li><a href="magazyn">Magazyn</a>
           </li>
@@ -30,7 +30,7 @@
           </li>
 	  <li><a href="det">Transakcje detaliczne</a>
           </li>
-          <li><a href="pracownicy">Pracownicy</a>
+          <li class="active"><a href="pracownicy">Pracownicy</a>
           </li>
           <li><a href="logout">Wyloguj się</a>
           </li>
@@ -44,20 +44,32 @@
       <p>
 	<table>
 	<tr>
-	<th>ID</th>
+	<th>ID Pracownika</th>
 	<th>Imię</th>
 	<th>Nazwisko</th>
 	<th>Telefon</th>
 	<th>E-mail</th>
+	<th>ID Etatu</th>
+	<th>Od</th>
+	<th>Do</th>
+	<th>Pensja</th>
+	<th>ID Stanowiska</th>
+	<th>Stanowisko</th>
 	<th></th>
 	</tr>
-	{% for item in pracownik %}
+	{% for item in wszystko %}
 	<tr>
         <th>{{ item[0] }}</th>
 	<th>{{ item[1] }}</th>
 	<th>{{ item[2] }}</th>
 	<th>{{ item[3] }}</th>
 	<th>{{ item[4] }}</th>
+        <th>{{ item[5] }}</th>
+	<th>{{ item[6] }}</th>
+	<th>{{ item[7] }}</th>
+	<th>{{ item[8] }}</th>
+	<th>{{ item[9] }}</th>
+	<th>{{ item[10] }}</th>
 	<th><div style="text-align:center;"><button type="button">Usuń</button></div></th>
 	</tr>
     	{% endfor %}

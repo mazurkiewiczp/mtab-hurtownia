@@ -99,6 +99,7 @@ def pracownicy():
             ))
     return render_template(
         'pracownicy.html',
+        wszystko=base.get_pracownicy(),
         pracownik=base.get_table_data("Pracownik"),
         etat=base.get_table_data("Etat"),
         stanowisko=base.get_table_data("Stanowisko")
