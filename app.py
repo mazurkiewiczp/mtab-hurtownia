@@ -26,14 +26,14 @@ def _check_password(login, password):
         return True
     return False
 
+@app.route('/index.html', methods=['GET', 'POST'])
 @app.route('/')
 def index():
     if 'login' in session:
-        return render_template('index.html')
+        return render_template('index.html', user=session['login'])
     return redirect(url_for('login'))
 
 
-@app.route('/index.html', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -45,7 +45,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    """Wylogowanie urzytkownika"""
+    """Wylogowanie uzytkownika"""
     session.pop('login', None)
     return redirect(url_for('index'))
 
