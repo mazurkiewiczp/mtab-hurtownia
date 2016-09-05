@@ -67,7 +67,8 @@ def det():
                            transakcje_detaliczne=base.get_table_data('Transakcje_detaliczne'),
                            produkt=base.get_table_data('Produkt'),
                            kategoria=base.get_table_data('Kategoria'),
-                           firma=base.get_table_data('Firma')
+                           firma=base.get_table_data('Firma'),
+                           zamowienia_produkty=base.get_zamowienia_produkty()
                            )
 
 
@@ -80,7 +81,8 @@ def magazyn():
                            magazyn=base.get_table_data('Magazyn'),
                            produkt=base.get_table_data('Produkt'),
                            kategoria=base.get_table_data('Kategoria'),
-                           firma=base.get_table_data('Firma')
+                           firma=base.get_table_data('Firma'),
+                           zamowienia_produkty=base.get_zamowienia_produkty()
                            )
 
 
@@ -160,7 +162,8 @@ def sklep():
                            sklep_detaliczny=base.get_table_data("Sklep_detaliczny"),
                            produkt=base.get_table_data('Produkt'),
                            kategoria=base.get_table_data('Kategoria'),
-                           firma=base.get_table_data('Firma')
+                           firma=base.get_table_data('Firma'),
+                           zamowienia_produkty=base.get_zamowienia_produkty()                           
                            )
 
 

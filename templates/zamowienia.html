@@ -41,6 +41,7 @@
   <div class="container">
     <div class="well">
       <p>
+	<h3>Lista transakcji</h3>
 	<table>
 	<tr>
 	<th>ID transakcji</th>
@@ -51,7 +52,6 @@
 	<th>ID Produktu</th>
 	<th>Cena</th>
 	<th>Ilość</th>
-	<th></th>
 	</tr>
 	{% for item in zamowienia_lista %}
 	<tr>
@@ -63,7 +63,6 @@
         <th>{{ item[5] }}</th>
 	<th>{{ item[6] }}</th>
 	<th>{{ item[7] }}</th>
-	<th><div style="text-align:center;"><button type="button">Usuń</button></div></th>
 	</tr>
     	{% endfor %}
 	</table>
@@ -74,6 +73,7 @@
   <div class="container">
     <div class="well">
       <p>
+	<h3>Produkty</h3>
 	<table>
 	<tr>
 	<th>ID Produktu</th>
@@ -87,7 +87,6 @@
 	<th>Produkt</th>
 	<th>Opis</th>
 	<th>Cena sugerowana</th>
-	<th></th>
 	</tr>
 	{% for item in zamowienia_produkty %}
 	<tr>
@@ -102,16 +101,12 @@
 	<th>{{ item[8] }}</th>
 	<th>{{ item[9] }}</th>
 	<th>{{ item[10] }}</th>
-	<th><div style="text-align:center;"><button type="button">Usuń</button></div></th>
 	</tr>
     	{% endfor %}
 	</table>
       </p>
     </div>
    </div>
-
-
-
 
 </body>
 
