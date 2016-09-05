@@ -5,19 +5,28 @@ from __future__ import absolute_import, print_function
 
 import crypt
 from flask import Flask, session, redirect, url_for, request, render_template
+from flask_restful import Resource, Api
 from mysql_client import SQLClient
+from OpenSSL import SSL
 import cmd.users as users
 
 # from flask_restful import Resource, Api
 
 app = Flask(__name__)
+api = Api(app)
 base = SQLClient()
 base.get_table_data('Pracownik')
 
-from OpenSSL import SSL
+
 context = SSL.Context(SSL.SSLv23_METHOD)
 context.use_privatekey_file('server.key')
 context.use_certificate_file('server.crt')
+
+
+class Pracownik(Resource):
+    def delete(self, id):
+        return base.delete_pracownik(id)
+
 
 def _check_password(login, password):
     """sprawdzanie hasła"""
@@ -25,6 +34,7 @@ def _check_password(login, password):
     if login in keys.keys() and crypt.crypt(password, 'pw') == keys[login]:
         return True
     return False
+
 
 @app.route('/index.html', methods=['GET', 'POST'])
 @app.route('/')
@@ -105,6 +115,7 @@ def pracownicy():
         stanowisko=base.get_table_data("Stanowisko")
     )
 
+
 @app.route('/nowy_etat', methods=['GET', 'POST'])
 def nowy_etat():
     if not "login" in session:
@@ -126,6 +137,7 @@ def nowy_etat():
         stanowisko=base.get_table_data("Stanowisko")
     )
 
+
 @app.route('/nowe_stanowisko', methods=['GET', 'POST'])
 def nowe_stanowisko():
     if not "login" in session:
@@ -142,6 +154,7 @@ def nowe_stanowisko():
         etat=base.get_table_data("Etat"),
         stanowisko=base.get_table_data("Stanowisko")
     )
+
 
 @app.route('/sklep', methods=['GET', 'POST'])
 @app.route('/sklep.html', methods=['GET', 'POST'])
@@ -200,4 +213,5 @@ def stanowisko():
 
 app.secret_key = 'Ba2ArN13w01N1k0W'
 context = ('server.crt', 'server.key')
+api.add_resource(Pracownik, '/pracownik/<int:id>')
 app.run(ssl_context=context)
