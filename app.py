@@ -25,6 +25,8 @@ context.use_certificate_file('server.crt')
 class Pracownik(Resource):
     def delete(self, id):
         return base.delete_pracownik(id)
+    def get(self, id):
+        return self.delete(id)
 
 
 def _check_password(login, password):

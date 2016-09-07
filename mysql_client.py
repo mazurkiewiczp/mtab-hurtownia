@@ -107,7 +107,7 @@ class SQLClient(object):
 
     def delete_pracownik(self, id):
         """Usuwa praconika o wskazanym id"""
-        sql = """DELETE FROM Praconwik WHERE id_pracownika = %s"""
+        sql = """DELETE FROM Pracownik WHERE id_pracownika = %s"""
         self.cursor.execute(sql, (id,))
         return self.cursor.fetchall()
 
