@@ -19,19 +19,19 @@
     <div class="container">
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li><a href="index.html">Strona główna</a>
+          <li><a href="/index.html">Strona główna</a>
           </li>
-          <li><a href="magazyn">Magazyn</a>
+          <li><a href="/magazyn">Magazyn</a>
           </li>
-	  <li class="active"><a href="zamowienia">Zamówienia</a>
+	  <li class="active"><a href="/zamowienia">Zamówienia</a>
           </li>
-          <li><a href="sklep">Sklep</a>
+          <li><a href="/sklep">Sklep</a>
           </li>
-	  <li><a href="det">Transakcje detaliczne</a>
+	  <li><a href="/det">Transakcje detaliczne</a>
           </li>
-          <li><a href="pracownicy">Pracownicy</a>
+          <li><a href="/pracownicy">Pracownicy</a>
           </li>
-          <li><a href="logout">Wyloguj się</a>
+          <li><a href="/logout">Wyloguj się</a>
           </li>
         </ul>
       </div>
@@ -44,14 +44,14 @@
 	<h3>Zamówienia</h3>
 	<table>
 	<tr>
-	<th>ID transakcji</th>
-	<th>ID Firmy</th>
-	<th>Data</th>
-	<th>Rodzaj transakcji</th>
 	<th>ID Zamówienia</th>
 	<th>ID Produktu</th>
 	<th>Cena</th>
 	<th>Ilość</th>
+	<th>ID Transakcji</th>
+	<th>ID Firmy</th>
+	<th>Data</th>
+	<th>Rodzaj transakcji</th>
 	</tr>
 	{% for item in zamowienia_lista %}
 	<tr>
@@ -69,6 +69,31 @@
       </p>
     </div>
    </div>
+
+  <div class="container">
+    <div class="well">
+      <h3>Dodaj zamówienie</h3>
+      <form method="post" action="/zamowienia">
+        <p><input type="text" name="id_produktu" value="" placeholder="ID Produktu"></p>
+        <p><input type="text" name="cena_produktu" value="" placeholder="Cena"></p>
+        <p><input type="text" name="ilosc_produktu" value="" placeholder="Ilość"></p>
+        <p class="submit"><input type="submit" name="commit" value="Dodaj"></p>
+      </form>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="well">
+      <h3>Dodaj transakcje hurtową</h3>
+      <form method="post" action="/zamowienia_t">
+        <p><input type="text" name="id_firmy" value="" placeholder="ID Firmy"></p>
+        <p><input type="text" name="data" value="" placeholder="Data"></p>
+        <p><input type="text" name="rodzaj_transakcji" value="" placeholder="Rodzaj transakcji"></p>
+        <p><input type="text" name="id_zamowienia" value="" placeholder="ID Zamowienia"></p>
+        <p class="submit"><input type="submit" name="commit" value="Dodaj"></p>
+      </form>
+    </div>
+  </div>
 
   <div class="container">
     <div class="well">

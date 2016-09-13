@@ -19,19 +19,19 @@
     <div class="container">
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li><a href="index.html">Strona główna</a>
+          <li><a href="/index.html">Strona główna</a>
           </li>
-          <li class="active"><a href="magazyn">Magazyn</a>
+          <li class="active"><a href="/magazyn">Magazyn</a>
           </li>
-	  <li><a href="zamowienia">Zamówienia</a>
+	  <li><a href="/zamowienia">Zamówienia</a>
           </li>
-          <li><a href="sklep">Sklep</a>
+          <li><a href="/sklep">Sklep</a>
           </li>
-	  <li><a href="det">Transakcje detaliczne</a>
+	  <li><a href="/det">Transakcje detaliczne</a>
           </li>
-          <li><a href="pracownicy">Pracownicy</a>
+          <li><a href="/pracownicy">Pracownicy</a>
           </li>
-          <li><a href="logout">Wyloguj się</a>
+          <li><a href="/logout">Wyloguj się</a>
           </li>
         </ul>
       </div>
@@ -48,6 +48,7 @@
 	<th>ID Produktu</th>
 	<th>Ilość na mazagynie</th>
 	<th>Komentarz</th>
+	<th></th>
 	</tr>
 	{% for item in magazyn %}
 	<tr>
@@ -55,12 +56,25 @@
 	<th>{{ item[1] }}</th>
 	<th>{{ item[2] }}</th>
 	<th>{{ item[3] }}</th>
+	<th><div style="text-align:center;"><form action="/magazyn/{{ item[0] }}"><input type="submit" value="Usuń" /></form></div></th>
 	</tr>
     	{% endfor %}
 	</table>
       </p>
     </div>
    </div>
+
+  <div class="container">
+    <div class="well">
+      <h3>Dodaj towar</h3>
+      <form method="post" action="/magazyn">
+        <p><input type="text" name="id_produktu" value="" placeholder="ID Produktu"></p>
+        <p><input type="text" name="ilosc" value="" placeholder="Ilość"></p>
+        <p><input type="text" name="komentarz" value="" placeholder="Komentarz"></p>
+        <p class="submit"><input type="submit" name="commit" value="Dodaj"></p>
+      </form>
+    </div>
+  </div>
 
   <div class="container">
     <div class="well">

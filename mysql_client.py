@@ -34,7 +34,7 @@ class SQLClient(object):
             return e
 
     def get_zamowienia_lista(self):
-        sql = """select Transakcja_hurtowa.*, Zamowienie.id_produktu, Zamowienie.cena_produktu, Zamowienie.ilosc_produktu from Transakcja_hurtowa left join Zamowienie on Transakcja_hurtowa.id_zamowienia = Zamowienie.id_zamowienia;"""
+        sql = """select Zamowienie.*, Transakcja_hurtowa.id_transakcji, Transakcja_hurtowa.id_firmy, Transakcja_hurtowa.data, Transakcja_hurtowa.rodzaj_transakcji from Zamowienie left join Transakcja_hurtowa on Zamowienie.id_zamowienia = Transakcja_hurtowa.id_zamowienia;"""
         try:
             self.cursor.execute(sql)
             return self.cursor.fetchall()
@@ -162,9 +162,9 @@ class SQLClient(object):
             log(e)
             return e
 
-    def add_transakcja_hurtowa(self, id_firmy, id_zamowienia, data=None, rodzaj_transakcji=None):
+    def add_transakcja_hurtowa(self, id_firmy, data, rodzaj_transakcji, id_zamowienia):
         """Dodaje pracownika"""
-        sql = """INSERT INTO Pracownik (id_firmy, data, rodzaj_transakcji, id_zamowienia) VALUES (%s, %s, %s, %s);"""
+        sql = """INSERT INTO Transakcja_hurtowa (id_firmy, data, rodzaj_transakcji, id_zamowienia) VALUES (%s, %s, %s, %s);"""
         try:
             self.cursor.execute(sql, (id_firmy, data, rodzaj_transakcji, id_zamowienia))
             return self.cursor.fetchall()
@@ -174,7 +174,40 @@ class SQLClient(object):
 
     def delete_pracownik(self, id):
         """Usuwa praconika o wskazanym id"""
+        sql = """DELETE FROM Etat WHERE id_pracownika = %s"""
+        self.cursor.execute(sql, (id,))
+        self.cursor.fetchall()
         sql = """DELETE FROM Pracownik WHERE id_pracownika = %s"""
+        try:
+            self.cursor.execute(sql, (id,))
+            return self.cursor.fetchall()
+        except Exception as e:
+            log(e)
+            return e
+
+    def delete_stanowisko(self, id):
+        """Usuwa stanowisko o wskazanym id"""
+        sql = """DELETE FROM Stanowisko WHERE id_stanowiska = %s"""
+        try:
+            self.cursor.execute(sql, (id,))
+            return self.cursor.fetchall()
+        except Exception as e:
+            log(e)
+            return e
+
+    def delete_magazyn(self, id):
+        """Usuwa stanowisko o wskazanym id"""
+        sql = """DELETE FROM Magazyn WHERE id_towaru = %s"""
+        try:
+            self.cursor.execute(sql, (id,))
+            return self.cursor.fetchall()
+        except Exception as e:
+            log(e)
+            return e
+
+    def delete_sklep(self, id):
+        """Usuwa stanowisko o wskazanym id"""
+        sql = """DELETE FROM Sklep_detaliczny WHERE id_towaru = %s"""
         try:
             self.cursor.execute(sql, (id,))
             return self.cursor.fetchall()

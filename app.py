@@ -22,11 +22,11 @@ context = SSL.Context(SSL.SSLv23_METHOD)
 context.use_privatekey_file('server.key')
 context.use_certificate_file('server.crt')
 
-class Pracownik(Resource):
-    def delete(self, id):
-        return base.delete_pracownik(id)
-    def get(self, id):
-        return self.delete(id)
+#class Pracownik(Resource):
+#    def delete(self, id):
+#        return base.delete_pracownik(id)
+#    def get(self, id):
+#        return self.delete(id)
 
 
 def _check_password(login, password):
@@ -88,6 +88,13 @@ def det():
 def magazyn():
     if not "login" in session:
         return redirect(url_for('login'))
+    if request.method == 'POST':
+        if request.form['id_produktu'] and request.form['ilosc']:
+            print(base.add_magazyn(
+                request.form['id_produktu'],
+                request.form['ilosc'],
+                request.form['komentarz'],
+            ))
     return render_template('magazyn.html',
                            magazyn=base.get_table_data('Magazyn'),
                            produkt=base.get_table_data('Produkt'),
@@ -203,21 +210,82 @@ def zamowienia():
                            zamowienia_produkty=base.get_zamowienia_produkty()			
                            )
 
-
-# Wzorzec XXX
-@app.route('/stanowisko', methods=['GET', 'POST'])
-def stanowisko():
+@app.route('/zamowienia_t', methods=['GET', 'POST'])
+def zamowienia_t():
     if not "login" in session:
         return redirect(url_for('login'))
     if request.method == 'POST':
-        if request.form['opis_stanowiska']:
-            print(base.add_stanowisko(
-                request.form['opis_stanowiska']
+        if request.form['id_firmy'] and request.form['data'] and request.form['rodzaj_transakcji'] and request.form['id_zamowienia']:
+            print(base.add_transakcja_hurtowa(
+                request.form['id_firmy'],
+                request.form['data'],
+                request.form['rodzaj_transakcji'],
+                request.form['id_zamowienia']
             ))
-    return base.get_table_data('Stanowisko')
+    return render_template('zamowienia.html',
+                           transakcja_hurtowa=base.get_table_data('Transakcja_hurtowa'),
+                           zamowienie=base.get_table_data("Zamowienie"),
+                           produkt=base.get_table_data('Produkt'),
+                           firma=base.get_table_data('Firma'),
+                           kategoria=base.get_table_data('Kategoria'),
+                           zamowienia_lista=base.get_zamowienia_lista(),
+                           zamowienia_produkty=base.get_zamowienia_produkty()			
+                           )
 
+@app.route('/stanowisko/<int:stanowisko_id>')
+def usun_stanowisko(stanowisko_id):
+    if not "login" in session:
+        return redirect(url_for('login'))
+    print(base.delete_stanowisko(stanowisko_id))
+    return render_template(
+        'pracownicy.html',
+        wszystko=base.get_pracownicy(),
+        pracownik=base.get_table_data("Pracownik"),
+        etat=base.get_table_data("Etat"),
+        stanowisko=base.get_table_data("Stanowisko")
+    )
+
+@app.route('/pracownik/<int:id_pracownika>')
+def usun_pracownika(id_pracownika):
+    if not "login" in session:
+        return redirect(url_for('login'))
+    print(base.delete_pracownik(id_pracownika))
+    return render_template(
+        'pracownicy.html',
+        wszystko=base.get_pracownicy(),
+        pracownik=base.get_table_data("Pracownik"),
+        etat=base.get_table_data("Etat"),
+        stanowisko=base.get_table_data("Stanowisko")
+    )
+
+
+@app.route('/magazyn/<int:id_towaru>')
+def usun_towar_m(id_towaru):
+    if not "login" in session:
+        return redirect(url_for('login'))
+    print(base.delete_magazyn(id_towaru))
+    return render_template('magazyn.html',
+                           magazyn=base.get_table_data('Magazyn'),
+                           produkt=base.get_table_data('Produkt'),
+                           kategoria=base.get_table_data('Kategoria'),
+                           firma=base.get_table_data('Firma'),
+                           zamowienia_produkty=base.get_zamowienia_produkty()
+                           )
+
+@app.route('/sklep/<int:id_towaru>')
+def usun_towar_s(id_towaru):
+    if not "login" in session:
+        return redirect(url_for('login'))
+    print(base.delete_sklep(id_towaru))
+    return render_template('sklep.html',
+                           sklep_detaliczny=base.get_table_data("Sklep_detaliczny"),
+                           produkt=base.get_table_data('Produkt'),
+                           kategoria=base.get_table_data('Kategoria'),
+                           firma=base.get_table_data('Firma'),
+                           zamowienia_produkty=base.get_zamowienia_produkty()                           
+                           )
 
 app.secret_key = 'Ba2ArN13w01N1k0W'
 context = ('server.crt', 'server.key')
-api.add_resource(Pracownik, '/pracownik/<int:id>')
+#api.add_resource(Pracownik, '/pracownik/<int:id>')
 app.run(ssl_context=context)
