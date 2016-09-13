@@ -125,6 +125,26 @@ def pracownicy():
         stanowisko=base.get_table_data("Stanowisko")
     )
 
+@app.route('/katalog', methods=['GET', 'POST'])
+@app.route('/katalog.html', methods=['GET', 'POST'])
+def katalog():
+    if not "login" in session:
+        return redirect(url_for('login'))
+    if request.method == 'POST':
+        if request.form['id_kategorii'] and request.form['nazwa'] and request.form['opis'] and request.form['cena_sugerowana']:
+            print(base.add_produkt(
+                request.form['id_kategorii'],
+                request.form['id_firmy'],
+                request.form['nazwa'],
+                request.form['opis'],
+                request.form['cena_sugerowana']
+            ))
+    return render_template(
+        'katalog.html',
+        firma=base.get_table_data("Firma"),
+        kategoria=base.get_table_data("Kategoria"),
+        produkt=base.get_table_data("Produkt")
+    )
 
 @app.route('/nowy_etat', methods=['GET', 'POST'])
 def nowy_etat():
@@ -147,6 +167,25 @@ def nowy_etat():
         stanowisko=base.get_table_data("Stanowisko")
     )
 
+@app.route('/nowa_firma', methods=['GET', 'POST'])
+def nowa_firma():
+    if not "login" in session:
+        return redirect(url_for('login'))
+    if request.method == 'POST':
+        if request.form['rodzaj_firmy'] and request.form['nazwa_firmy']:
+            print(base.add_firma(
+                request.form['rodzaj_firmy'],
+                request.form['nazwa_firmy'],
+                request.form['adres'],
+                request.form['telefon']
+            ))
+    return render_template(
+        'katalog.html',
+        firma=base.get_table_data("Firma"),
+        kategoria=base.get_table_data("Kategoria"),
+        produkt=base.get_table_data("Produkt")
+    )
+
 
 @app.route('/nowe_stanowisko', methods=['GET', 'POST'])
 def nowe_stanowisko():
@@ -163,6 +202,22 @@ def nowe_stanowisko():
         pracownik=base.get_table_data("Pracownik"),
         etat=base.get_table_data("Etat"),
         stanowisko=base.get_table_data("Stanowisko")
+    )
+
+@app.route('/nowa_kategoria', methods=['GET', 'POST'])
+def nowa_kategoria():
+    if not "login" in session:
+        return redirect(url_for('login'))
+    if request.method == 'POST':
+        if request.form['kategoria']:
+            print(base.add_kategoria(
+                request.form['kategoria']
+            ))
+    return render_template(
+        'katalog.html',
+        firma=base.get_table_data("Firma"),
+        kategoria=base.get_table_data("Kategoria"),
+        produkt=base.get_table_data("Produkt")
     )
 
 
@@ -284,6 +339,42 @@ def usun_towar_s(id_towaru):
                            firma=base.get_table_data('Firma'),
                            zamowienia_produkty=base.get_zamowienia_produkty()                           
                            )
+
+@app.route('/kategoria/<int:id_kategorii>')
+def usun_kategorie(id_kategorii):
+    if not "login" in session:
+        return redirect(url_for('login'))
+    print(base.delete_kategoria(id_kategorii))
+    return render_template(
+        'katalog.html',
+        firma=base.get_table_data("Firma"),
+        kategoria=base.get_table_data("Kategoria"),
+        produkt=base.get_table_data("Produkt")
+    )
+
+@app.route('/firma/<int:id_firmy>')
+def usun_firme(id_firmy):
+    if not "login" in session:
+        return redirect(url_for('login'))
+    print(base.delete_firma(id_firmy))
+    return render_template(
+        'katalog.html',
+        firma=base.get_table_data("Firma"),
+        kategoria=base.get_table_data("Kategoria"),
+        produkt=base.get_table_data("Produkt")
+    )
+
+@app.route('/produkt/<int:id_produkt>')
+def usun_produkt(id_produkt):
+    if not "login" in session:
+        return redirect(url_for('login'))
+    print(base.delete_produkt(id_produkt))
+    return render_template(
+        'katalog.html',
+        firma=base.get_table_data("Firma"),
+        kategoria=base.get_table_data("Kategoria"),
+        produkt=base.get_table_data("Produkt")
+    )
 
 app.secret_key = 'Ba2ArN13w01N1k0W'
 context = ('server.crt', 'server.key')

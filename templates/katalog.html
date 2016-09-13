@@ -22,7 +22,7 @@
         <ul class="nav navbar-nav">
           <li><a href="/index.html">Strona główna</a>
           </li>
-          <li><a href="/katalog">Katalog</a>
+          <li class="active"><a href="/katalog">Katalog</a>
           </li>
           <li><a href="/magazyn">Magazyn</a>
           </li>
@@ -32,7 +32,7 @@
           </li>
 	  <li><a href="/det">Transakcje detaliczne</a>
           </li>
-          <li class="active"><a href="/pracownicy">Pracownicy</a>
+          <li><a href="/pracownicy">Pracownicy</a>
           </li>
           <li><a href="/logout">Wyloguj się</a>
           </li>
@@ -43,24 +43,19 @@
 
   <div class="container">
     <div class="well">
-      <h3>Pracownicy</h3>
+      <h3>Produkty</h3>
       <p>
 	<table>
 	<tr>
-	<th>ID Pracownika</th>
-	<th>Imię</th>
-	<th>Nazwisko</th>
-	<th>Telefon</th>
-	<th>E-mail</th>
-	<th>ID Etatu</th>
-	<th>Od</th>
-	<th>Do</th>
-	<th>Pensja</th>
-	<th>ID Stanowiska</th>
-	<th>Stanowisko</th>
+	<th>ID Produktu</th>
+	<th>Kategoria</th>
+	<th>Firma</th>
+	<th>Nazwa</th>
+	<th>Opis</th>
+	<th>Cena sugerowana</th>
 	<th></th>
 	</tr>
-	{% for item in wszystko %}
+	{% for item in produkt %}
 	<tr>
         <th>{{ item[0] }}</th>
 	<th>{{ item[1] }}</th>
@@ -68,28 +63,23 @@
 	<th>{{ item[3] }}</th>
 	<th>{{ item[4] }}</th>
         <th>{{ item[5] }}</th>
-	<th>{{ item[6] }}</th>
-	<th>{{ item[7] }}</th>
-	<th>{{ item[8] }}</th>
-	<th>{{ item[9] }}</th>
-	<th>{{ item[10] }}</th>
-	<th><div style="text-align:center;"><form action="/pracownik/{{ item[0] }}"><input type="submit" value="Usuń" /></form></div></th>
+	<th><div style="text-align:center;"><form action="/produkt/{{ item[0] }}"><input type="submit" value="Usuń" /></form></div></th>
 	</tr>
     	{% endfor %}
 	</table>
       </p>
     </div>
    </div>
-
-
+ 
   <div class="container">
     <div class="well">
-      <h3>Dodaj pracownika</h3>
-      <form method="post" action="/pracownicy">
-        <p><input type="text" name="imie" value="" placeholder="Imie pracownika"></p>
-        <p><input type="text" name="nazwisko" value="" placeholder="Nazwisko Pracownika"></p>
-        <p><input type="text" name="telefon" value="" placeholder="telefon"></p>
-        <p><input type="text" name="mail" value="" placeholder="mail"></p>
+      <h3>Dodaj produkt</h3>
+      <form method="post" action="/katalog">
+        <p><input type="text" name="id_kategorii" value="" placeholder="ID Kategorii"></p>
+        <p><input type="text" name="id_firmy" value="" placeholder="ID Firmy"></p>
+        <p><input type="text" name="nazwa" value="" placeholder="Nazwa"></p>
+        <p><input type="text" name="opis" value="" placeholder="Opis"></p>
+        <p><input type="text" name="cena_sugerowana" value="" placeholder="Cena sugerowana"></p>
         <p class="submit"><input type="submit" name="commit" value="Dodaj"></p>
       </form>
     </div>
@@ -97,41 +87,62 @@
 
   <div class="container">
     <div class="well">
-      <h3>Dodaj Etat</h3>
-      <form method="post" action="/nowy_etat">
-        <p><input type="text" name="od" value="" placeholder="Od"></p>
-        <p><input type="text" name="do" value="" placeholder="Do"></p>
-        <p><input type="text" name="pensja" value="" placeholder="Pensja"></p>
-        <p><input type="text" name="id_stanowiska" value="" placeholder="id_stanowiska"></p>
-        <p><input type="text" name="id_pracownika" value="" placeholder="id_pracownika"></p>
-        <p class="submit"><input type="submit" name="commit" value="Dodaj"></p>
-      </form>
-    </div>
-  </div>
-
-
-  <div class="container">
-    <div class="well">
-      <h3>Stanowiska</h3>
+      <h3>Firmy</h3>
 	<p>    
 	<table>
 	<tr>
-	<th>ID Stanowiska</th>
-	<th>Stanowisko</th>
+	<th>ID Firmy</th>
+	<th>Rodzaj</th>
+	<th>Nazwa</th>
+	<th>Adres</th>
+	<th>Telefon</th>
 	<th></th>
 	</tr>
-	{% for item in stanowisko %}
+	{% for item in firma %}
 	<tr>
 	<th>{{ item[0] }}</th>
 	<th>{{ item[1] }}</th>
-	<th><div style="text-align:center;"><form action="/stanowisko/{{ item[0] }}"><input type="submit" value="Usuń" /></form></div></th>
+	<th>{{ item[2] }}</th>
+	<th>{{ item[3] }}</th>
+	<th>{{ item[4] }}</th>
+	<th><div style="text-align:center;"><form action="/firma/{{ item[0] }}"><input type="submit" value="Usuń" /></form></div></th>
 	</tr>
     	{% endfor %}
 	</table>
 	</p>
-      <h3>Dodaj Stanowisko</h3>
-      <form method="post" action="/nowe_stanowisko">
-        <p><input type="text" name="stanowisko" value="" placeholder="Stanowisko"></p>
+      <h3>Dodaj Firmę</h3>
+      <form method="post" action="/nowa_firma">
+        <p><input type="text" name="rodzaj_firmy" value="" placeholder="Rodzaj firmy"></p>
+        <p><input type="text" name="nazwa_firmy" value="" placeholder="Nazwa"></p>
+        <p><input type="text" name="adres" value="" placeholder="Adres"></p>
+        <p><input type="text" name="telefon" value="" placeholder="Telefon"></p>
+        <p class="submit"><input type="submit" name="commit" value="Dodaj"></p>
+      </form>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="well">
+      <h3>Kategorie</h3>
+	<p>    
+	<table>
+	<tr>
+	<th>ID Kategorii</th>
+	<th>Kategoria</th>
+	<th></th>
+	</tr>
+	{% for item in kategoria %}
+	<tr>
+	<th>{{ item[0] }}</th>
+	<th>{{ item[1] }}</th>
+	<th><div style="text-align:center;"><form action="/kategoria/{{ item[0] }}"><input type="submit" value="Usuń" /></form></div></th>
+	</tr>
+    	{% endfor %}
+	</table>
+	</p>
+      <h3>Dodaj Kategorię</h3>
+      <form method="post" action="/nowa_kategoria">
+        <p><input type="text" name="opis_kategorii" value="" placeholder="Kategoria"></p>
         <p class="submit"><input type="submit" name="commit" value="Dodaj"></p>
       </form>
     </div>

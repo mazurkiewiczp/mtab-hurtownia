@@ -96,7 +96,7 @@ class SQLClient(object):
         """Dodaje kategorie"""
         sql = """INSERT INTO Kategoria (opis_kategorii) VALUES (%s);"""
         try:
-            self.cursor.execute(sql, (opis_kategorii))
+            self.cursor.execute(sql, (opis_kategorii,))
             return self.cursor.fetchall()
         except Exception as e:
             log(e)
@@ -208,6 +208,36 @@ class SQLClient(object):
     def delete_sklep(self, id):
         """Usuwa stanowisko o wskazanym id"""
         sql = """DELETE FROM Sklep_detaliczny WHERE id_towaru = %s"""
+        try:
+            self.cursor.execute(sql, (id,))
+            return self.cursor.fetchall()
+        except Exception as e:
+            log(e)
+            return e
+
+    def delete_produkt(self, id):
+        """Usuwa produkt o wskazanym id"""
+        sql = """DELETE FROM Produkt WHERE id_produktu = %s"""
+        try:
+            self.cursor.execute(sql, (id,))
+            return self.cursor.fetchall()
+        except Exception as e:
+            log(e)
+            return e
+
+    def delete_firma(self, id):
+        """Usuwa firme o wskazanym id"""
+        sql = """DELETE FROM Firma WHERE id_firmy = %s"""
+        try:
+            self.cursor.execute(sql, (id,))
+            return self.cursor.fetchall()
+        except Exception as e:
+            log(e)
+            return e
+
+    def delete_kategoria(self, id):
+        """Usuwa kategorie o wskazanym id"""
+        sql = """DELETE FROM Kategoria WHERE id_kategorii = %s"""
         try:
             self.cursor.execute(sql, (id,))
             return self.cursor.fetchall()
