@@ -112,7 +112,7 @@ class SQLClient(object):
             log(e)
             return e
 
-    def add_produkt(self, id_kategorii, nazwa, cena_sugerowana, id_firmy=None, opis=None):
+    def add_produkt(self, id_kategorii, id_firmy, nazwa, opis, cena_sugerowana):
         """Dodaje produkt"""
         sql = """INSERT INTO Produkt (id_kategorii, id_firmy, nazwa, opis, cena_sugerowana) VALUES (%s, %s, %s, %s, %s);"""
         try:

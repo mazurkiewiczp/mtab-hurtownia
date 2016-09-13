@@ -129,7 +129,7 @@ def pracownicy():
 @app.route('/katalog.html', methods=['GET', 'POST'])
 def katalog():
     if not "login" in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('/login'))
     if request.method == 'POST':
         if request.form['id_kategorii'] and request.form['nazwa'] and request.form['opis'] and request.form['cena_sugerowana']:
             print(base.add_produkt(
@@ -209,9 +209,9 @@ def nowa_kategoria():
     if not "login" in session:
         return redirect(url_for('login'))
     if request.method == 'POST':
-        if request.form['kategoria']:
+        if request.form['opis_kategorii']:
             print(base.add_kategoria(
-                request.form['kategoria']
+                request.form['opis_kategorii']
             ))
     return render_template(
         'katalog.html',
